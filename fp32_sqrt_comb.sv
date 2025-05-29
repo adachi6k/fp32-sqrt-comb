@@ -58,9 +58,9 @@ module fp32_sqrt_comb (
             root = 0;
             for (i = 0; i < 24; i = i + 1) begin
                 rem = {rem[45:0], op[23-i], 1'b0};
-                test_div = {root, 1'b1};
-                if (rem[47:24] >= test_div) begin
-                    rem[47:24] = rem[47:24] - test_div;
+                test_div = {{1'b0, root}, 1'b1};
+                if ({2'b00, rem[47:24]} >= test_div) begin
+                    rem[47:24] = rem[47:24] - test_div[23:0];
                     root = {root[22:0], 1'b1};
                 end else begin
                     root = {root[22:0], 1'b0};
